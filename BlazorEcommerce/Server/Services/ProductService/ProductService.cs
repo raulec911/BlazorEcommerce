@@ -8,9 +8,22 @@
         {
             _context = context;
         }
-        public Task<ServiceResponse<Product>> GetProductAsync(int productId)
+        public async Task<ServiceResponse<Product>> GetProductAsync(int productId)
         {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<Product>();
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
+
+            if (product == null)
+            {
+                response.Success = false;
+                response.Message = "Sorry, but this product does not exist.";
+            }
+            else
+            {
+                response.Data = product;             
+            }
+
+            return response;
         }
 
         public async Task<ServiceResponse<List<Product>>> GetProductsAsync()

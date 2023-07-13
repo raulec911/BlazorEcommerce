@@ -99,6 +99,7 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
 /* Estilos dark-theme */
 .dark-theme {
     background-color: #222;
@@ -137,4 +138,22 @@ a, .btn-link {
 
 .dark-theme tr:nth-child(odd) {
     background-color: #333;
+}
+
+.price {
+    color: #ff0;
+}
+
+p {
+    text-align: justify;
+}
+
+.media {
+    display: flex;
+    align-items: flex-start;
+}
+
+
+.media-body {
+    flex: 1;
 }
