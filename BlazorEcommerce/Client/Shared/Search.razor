@@ -37,7 +37,14 @@
 
     public void SearchProducts()
     {
-        NavigationManager.NavigateTo($"search/{searchText}");
+        if (searchText.Length > 1)
+        {
+            NavigationManager.NavigateTo($"search/{searchText}");
+        }
+        else
+        {
+            NavigationManager.NavigateTo("");
+        }
     }
 
     public async Task HandleSearch(KeyboardEventArgs args)
@@ -50,7 +57,7 @@
             }
             else
             {
-                NavigationManager.NavigateTo("/");
+                NavigationManager.NavigateTo("");
             }
         }
         else if (searchText.Length > 1)
