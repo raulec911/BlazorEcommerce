@@ -1,7 +1,16 @@
-﻿namespace BlazorEcommerce.Server.Services.AuthService
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+namespace BlazorEcommerce.Server.Services.AuthService
 {
     public class AuthService : IAuthService
     {
+        private readonly DataContext _context;
+        public AuthService(DataContext context)
+        {
+            _context = context;
+
+        }
         public Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
         {
             throw new NotImplementedException();
@@ -32,9 +41,14 @@
             throw new NotImplementedException();
         }
 
-        public Task<bool> UserExists(string email)
+        public async Task<bool> UserExists(string email)
         {
-            throw new NotImplementedException();
+            if (await _context.Users.AnyAsync(user => user.Email.ToLower()
+                  .Equals(email.ToLower())))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
